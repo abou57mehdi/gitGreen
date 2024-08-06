@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anomaly Detection Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .danger-cell {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<style>
+    .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+</style>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Anomaly Detection Results</h1>
+        <h2>Processed Data</h2>
+        <p><strong>  see results in the last column (anomaly) </strong> </p>
+        {% if data %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            {% for column in data.0.keys %}
+                                <th>{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                {% for value in row.values %}
+                                    <td class="{% if value == 'Yes' %}danger-cell{% endif %}">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-warning">No data available to display.</div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

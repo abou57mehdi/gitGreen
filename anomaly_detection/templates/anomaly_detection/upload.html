@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload CSV File</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<style>
+    .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+</style>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Upload CSV File for Anomaly Detection</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="file" class="form-control-label">Choose CSV file:</label>
+                <input type="file" name="file" id="file" class="form-control">
+                {% if form.file.errors %}
+                    <div class="alert alert-danger mt-2">
+                        {% for error in form.file.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        {% if error %}
+            <div class="alert alert-danger mt-3">{{ error }}</div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
