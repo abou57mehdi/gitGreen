@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy Consumption Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+        }
+        .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+        .form-group input {
+            font-size: 1.25rem;
+            height: calc(2.25rem + 2px);
+        }
+        .form-group label {
+            font-size: 1.125rem;
+        }
+        .btn-primary {
+            font-size: 1.25rem;
+            padding: 0.75rem 1.25rem;
+        }
+        .form-text {
+            font-size: 0.875rem;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Energy Consumption Prediction</h1>
+        <p>Welcome to the Energy Consumption Prediction tool. This tool is designed to estimate the energy consumption of a data server based on key electrical parameters. The prediction is based on a machine learning model trained using data from an HP Z440 workstation, a typical data server used in various IT environments.</p>
+        <p>To make a prediction, please enter the following details:</p>
+        <ul>
+            <li>Voltage (V)</li>
+            <li>Current (A)</li>
+            <li>Frequency (Hz)</li>
+            <li>ESP32 Temperature (°C)</li>
+        </ul>
+        <p class="mb-4">The dataset used for training the model is from the <a href="https://ieee-dataport.org/open-access/data-server-energy-consumption-dataset" class="text-primary">IEEE DataPort Energy Consumption Dataset</a>.</p>
+
+        <form action="{% url 'energy_prediction:predict_form' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="voltaje">Voltage (V)</label>
+                <input type="number" id="voltaje" name="voltaje" step="any" class="form-control" min="0" max="300" placeholder="Enter voltage in volts" required>
+                <small class="form-text text-muted">Typical range: 0-300 volts.</small>
+                {{ form.voltaje.errors }}
+            </div>
+            <div class="form-group">
+                <label for="corriente">Current (A)</label>
+                <input type="number" id="corriente" name="corriente" step="any" class="form-control" min="0" max="50" placeholder="Enter current in amperes" required>
+                <small class="form-text text-muted">Typical range: 0-50 amperes.</small>
+                {{ form.corriente.errors }}
+            </div>
+            <div class="form-group">
+                <label for="frecuencia">Frequency (Hz)</label>
+                <input type="number" id="frecuencia" name="frecuencia" step="any" class="form-control" min="0" max="60" placeholder="Enter frequency in Hertz" required>
+                <small class="form-text text-muted">Typical range: 0-60 Hertz.</small>
+                {{ form.frecuencia.errors }}
+            </div>
+            <div class="form-group">
+                <label for="temperatura_esp32">ESP32 Temperature (°C)</label>
+                <input type="number" id="temperatura_esp32" name="temperatura_esp32" step="any" class="form-control" min="-40" max="125" placeholder="Enter temperature in Celsius" required>
+                <small class="form-text text-muted">Typical range: -40 to 125°C.</small>
+                {{ form.temperatura_esp32.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <div class="alert alert-success mt-4">
+            <strong>Prediction:</strong>The estimated energy consumption of the data server is approximately {{ prediction }} watts. This estimate is based on the electrical parameters you provided and the machine learning model trained on the IEEE DataPort dataset.<br>
+            <p>Keep in mind that this prediction is an estimate based on historical data and the provided parameters. Actual energy consumption may vary depending on other factors not considered in the model.</p>
+        </div>
+        {% elif error %}
+        <div class="alert alert-danger mt-4">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
