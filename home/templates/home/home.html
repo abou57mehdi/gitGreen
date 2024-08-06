@@ -1,0 +1,201 @@
+{% load static %} <!-- Load static tag library -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Green Data Center</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js/minified/introjs.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+    <style>
+        body {
+        background-color: #f0f2f5; /* Light grayish background color */
+        font-family: Arial, sans-serif;
+        color : #333333;
+        margin: 0;
+        }
+        .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+        .hero-section {
+            background-image: url('{% static "images/green.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text contrast */
+            z-index: 1;
+        }
+        .hero-section h1, .hero-section p {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .card {
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    background-color: #ffffff; /* White background for cards */
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555555;
+}
+
+.card img {
+    max-width: 100%;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 15px;
+}
+        .footer {
+            background-color: #f0f0f0;
+            padding: 20px 0;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 0;
+        }
+        .footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="hero-section">
+        <h1>Welcome to the Green Data Center Guide</h1>
+        <p>Discover how to optimize energy efficiency with cutting-edge solutions tailored for data servers. Leverage our advanced tools and insights to make informed decisions and drive sustainability.</p>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3" data-step="1" data-intro="This is where you can view detailed reports and analytics.">
+                <div class="card">
+                    <img src="{% static 'images/reports.png' %}" class="card-img-top" alt="Reports">
+                    <div class="card-body">
+                        <h5 class="card-title">Reports and Analytics</h5>
+                        <p class="card-text">Dive into comprehensive reports and analytics on energy consumption and efficiency. Understand your energy profile with detailed insights.</p>
+                        <a href="{% url 'monitoring:article_list' %}" class="btn btn-primary">View Reports</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-step="2" data-intro="Use this section to make energy predictions based on your data.">
+                <div class="card">
+                    <img src="{% static 'images/machine-learning.png' %}" class="card-img-top" alt="Prediction">
+                    <div class="card-body">
+                        <h5 class="card-title">Energy Prediction</h5>
+                        <p class="card-text">Utilize our advanced machine learning model to predict future energy consumption based on your current data. Plan effectively with accurate forecasts.</p>
+                        <a href="{% url 'energy_prediction:predict_form' %}" class="btn btn-primary">Make a Prediction</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-step="3" data-intro="This section helps you detect anomalies in energy consumption.">
+                <div class="card">
+                    <img src="{% static 'images/detection.png' %}" class="card-img-top" alt="Feature 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Anomaly Detection</h5>
+                        <p class="card-text">Explore additional features and functionalities designed to enhance your energy management and optimization efforts.</p>
+                        <a href="{% url 'anomaly_detection:upload_file' %}" class="btn btn-primary">Anomaly Detection</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-step="4" data-intro="Upload and visualize your data in real-time here.">
+                <div class="card">
+                    <img src="{% static 'images/visiteur.png' %}" class="card-img-top" alt="Real-Time Data Tracking">
+                    <div class="card-body">
+                        <h5 class="card-title">Real-Time Data Tracking</h5>
+                        <p class="card-text">Upload and visualize your data instantly. Track and analyze real-time data to make quick decisions and monitor your energy consumption effectively.</p>
+                        <a href="{% url 'monitoring:upload_file' %}" class="btn btn-primary">Upload Data</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Green Data Center. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    if (window.location.search.includes('restart_intro=true')) {
+        localStorage.removeItem('introCompleted');
+    }
+
+    if (!localStorage.getItem('introCompleted')) {
+        introJs().start().oncomplete(function () {
+            localStorage.setItem('introCompleted', 'true');
+        });
+    }
+});
+
+    </script>
+</body>
+</html>
