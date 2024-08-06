@@ -1,0 +1,242 @@
+
+{% load static %} <!-- Load static tag library -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>Frequently Asked Questions (F&Q)</h1><br>
+        <div class="card-body">
+            <h5 class="card-title">Frequently Asked Questions</h5>
+            <p>
+                Our FAQ section is designed to assist users with uploading datasets and using our machine learning application. We have based our approach on best practices from leading machine learning platforms.
+            </p>
+            <p>
+                For example, we have looked at:
+            </p>
+            <ul>
+                <li><a href="https://cloud.google.com/ai-platform/docs" target="_blank">Google Cloud AI Platform</a> - Offers guidance on uploading datasets for machine learning.</li>
+                <li><a href="https://docs.aws.amazon.com/sagemaker/latest/dg/welcome.html" target="_blank">Amazon SageMaker</a> - Includes FAQs on dataset management and model training.</li>
+                <li><a href="https://learn.microsoft.com/en-us/azure/machine-learning/" target="_blank">Microsoft Azure Machine Learning</a> - Provides documentation on dataset uploads and machine learning workflows.</li>
+                <li><a href="https://docs.datarobot.com/" target="_blank">DataRobot</a> - Covers dataset uploads and model automation.</li>
+                <li><a href="https://docs.h2o.ai/" target="_blank">H2O.ai</a> - Contains FAQs on dataset handling and machine learning model training.</li>
+                <li><a href="https://www.kaggle.com/datasets" target="_blank">Kaggle</a> - Offers a platform for uploading and managing datasets in machine learning competitions.</li>
+                <li><a href="https://www.ibm.com/docs/en/watson-studio" target="_blank">IBM Watson Studio</a> - Provides details on uploading datasets and managing machine learning projects.</li>
+            </ul>
+            <p>
+                These references have guided us in developing our FAQ section to ensure we address common user questions effectively.
+            </p>
+        </div>
+        
+        
+        <div class="accordion" id="faqAccordion">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            How do I use the Reports and Analytics app?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        The Reports and Analytics app allows you to view and analyze various metrics and data related to your energy usage. You can generate reports, view charts, and gain insights into your energy consumption patterns by clicking on the article you want to see , the data related to the article selected will be visualized on the page.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I use the Energy Prediction app?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        <h5 class="card-title">How do I use the Energy Prediction app?</h5>
+                        <p>
+                            The Energy Prediction app helps you forecast future energy consumption based on historical data and machine learning models. Input your current data, and the app will predict future energy needs and trends.
+                        </p>
+                        <h6>Access the App:</h6>
+                        <p>
+                            Navigate to the Energy Prediction page from the home page.
+                        </p>
+                        <h6>Fill Out the Form:</h6>
+                        <ul>
+                            <li><strong>Voltage (V):</strong> Enter a value between 0 and 300 volts.</li>
+                            <li><strong>Current (A):</strong> Enter a value between 0 and 50 amperes.</li>
+                            <li><strong>Frequency (Hz):</strong> Enter a value between 0 and 60 Hertz.</li>
+                            <li><strong>ESP32 Temperature (°C):</strong> Enter a value between -40 and 125°C.</li>
+                        </ul>
+                        <h6>Submit the Form:</h6>
+                        <p>
+                            After filling out the fields, submit the form to receive a prediction.
+                        </p>
+                        <h6>View Prediction:</h6>
+                        <p>
+                            The app will display the prediction based on the input values.
+                        </p>
+                        <h6>Constraints and Considerations:</h6>
+                        <ul>
+                            <li><strong>Ensure Data Accuracy:</strong> Input values must be within the specified ranges for accurate predictions.</li>
+                            <li><strong>Form Validation:</strong> The form validates input values. Correct any errors indicated by the form.</li>
+                            <li><strong>Model and Scaler:</strong> Ensure the model, scaler, and encoder files are correctly placed in the `energy_prediction` directory.</li>
+                            <li><strong>Server Logs:</strong> For debugging, check server logs if predictions are incorrect or if errors occur.</li>
+                            <li><strong>Handling Missing Data:</strong> The app will prompt you to correct any missing or invalid data before proceeding with predictions.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How do I use the Anomaly Detection app?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        <h5 class="card-title">How do I use the Anomaly Detection app?</h5>
+                        <p>
+                            The Anomaly Detection app identifies unusual patterns or anomalies in your data using machine learning models. Upload your data, and the app will analyze it to detect any anomalies.
+                        </p>
+                        
+                        <h6>Access the App:</h6>
+                        <p>
+                            Navigate to the Anomaly Detection page from the home page.
+                        </p>
+                    
+                        <h6>Upload Data File:</h6>
+                        <ul>
+                            <li>Select the file containing your data from your local storage.</li>
+                            <li>Ensure the file is in CSV format and contains the necessary columns.</li>
+                        </ul>
+                    
+                        <h6>Fill Out the Form:</h6>
+                        <ul>
+                            <li><strong>Data File:</strong> Upload a CSV file containing the data to be analyzed.</li>
+                        </ul>
+                    
+                        <h6>Submit the Form:</h6>
+                        <p>
+                            After uploading the file, submit the form to start the anomaly detection process.
+                        </p>
+                    
+                        <h6>View Results:</h6>
+                        <p>
+                            The app will display the results, highlighting any detected anomalies. You can view both the original data with anomaly markings and a filtered list of anomalous entries.
+                        </p>
+                    
+                        <h6>Constraints and Considerations:</h6>
+                        <ul>
+                            <li><strong>Ensure Data Accuracy:</strong> Your CSV file should include columns such as `energia`, `WORKSTATION_CPU_POWER`, and `WORKSTATION_GPU_POWER`. Missing or incorrect columns may lead to errors or inaccurate results.</li>
+                            <li><strong>Form Validation:</strong> The form will validate the uploaded file. Ensure your file is correctly formatted and contains all necessary data.</li>
+                            <li><strong>Model and Scaler:</strong> Ensure the model and scaler files are correctly placed in the `anomaly_detection` directory.</li>
+                            <li><strong>Server Logs:</strong> For debugging, check server logs if anomalies are not detected as expected or if errors occur.</li>
+                            <li><strong>Handling Missing Data:</strong> The app will handle missing data by filling it with column means before processing. Ensure that your data file is well-prepared to avoid issues.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How do I use the Data Tracking app?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        <h5 class="card-title">How do I use the Data Tracking app?</h5>
+                        <p>
+                            The Data Tracking app allows you to upload CSV files and generate various types of charts based on your data. You can visualize your data using line, scatter, bar, or pie charts.
+                        </p>
+                        
+                        <h6>Access the App:</h6>
+                        <p>
+                            Navigate to the Data Tracking page from the home page.
+                        </p>
+                    
+                        <h6>Upload Data File:</h6>
+                        <ul>
+                            <li>Select a CSV file containing the data you wish to visualize.</li>
+                            <li>Ensure that the file is in CSV format and includes the necessary columns for plotting.</li>
+                        </ul>
+                    
+                        <h6>Fill Out the Form:</h6>
+                        <ul>
+                            <li><strong>Chart Type:</strong> Choose the type of chart you want to generate (line, scatter, bar, or pie).</li>
+                            <li><strong>X-Axis:</strong> Select the column for the X-axis by entering the column number.</li>
+                            <li><strong>Y-Axis:</strong> Select the columns for the Y-axis by entering comma-separated column numbers. Note that some chart types may require only one Y-axis column.</li>
+                        </ul>
+                    
+                        <h6>Submit the Form:</h6>
+                        <p>
+                            After filling out the form and uploading the file, submit the form to generate the chart.
+                        </p>
+                    
+                        <h6>View Results:</h6>
+                        <p>
+                            The app will display the generated chart based on the selected chart type and data. You can view the chart directly on the page.
+                        </p>
+                    
+                        <h6>Constraints and Considerations:</h6>
+                        <ul>
+                            <li><strong>Ensure File Type:</strong> The file must be in CSV format. Other file types will not be accepted.</li>
+                            <li><strong>Column Validity:</strong> Make sure the selected X-axis and Y-axis columns are valid and exist in the CSV file.</li>
+                            <li><strong>Chart Type Compatibility:</strong> Ensure that the selected chart type matches the data provided. For example, scatter and pie charts require specific configurations.</li>
+                            <li><strong>Error Handling:</strong> The app will notify you of any errors, such as invalid column numbers or unsupported chart types. Address these issues to successfully generate your chart.</li>
+                            <li><strong>Data Accuracy:</strong> Verify that the data in your CSV file is correct and properly formatted to avoid issues with chart generation.</li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
