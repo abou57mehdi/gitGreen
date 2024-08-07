@@ -1,22 +1,10 @@
 ﻿absl-py==2.1.0
-altair==5.3.0
 asgiref==3.8.1
-asttokens==2.4.1
-attrs==23.2.0
-beautifulsoup4==4.12.3
-blinker==1.8.2
-cachetools==5.3.3
 certifi==2024.2.2
-cffi==1.16.0
 charset-normalizer==3.3.2
 click==8.1.7
-colorama==0.4.6
-comm==0.2.2
 configparser==7.0.0
-contourpy==1.2.1
-cycler==0.12.1
 debugpy==1.8.1
-decorator==5.1.1
 Django==5.0.6
 django-cors-headers==4.4.0
 djangorestframework==3.15.2
@@ -25,7 +13,6 @@ executing==2.0.1
 flatbuffers==24.3.25
 fonttools==4.52.1
 gitdb==4.0.11
-GitPython==3.1.43
 googlemaps==4.10.0
 idna==3.7
 ipykernel==6.29.4
@@ -85,7 +72,6 @@ rich==13.7.1
 rpds-py==0.18.1
 scikit-learn==1.5.1
 scipy==1.13.1
-seaborn==0.13.2
 setuptools==69.5.1
 six==1.16.0
 smmap==5.0.1
@@ -93,7 +79,6 @@ sounddevice==0.4.7
 soupsieve==2.5
 sqlparse==0.5.0
 stack-data==0.6.3
-streamlit==1.35.0
 tenacity==8.3.0
 threadpoolctl==3.5.0
 toml==0.10.2
