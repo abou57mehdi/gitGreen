@@ -14,3 +14,4 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'green_data_center.settings')
 
 application = get_wsgi_application()
+app = appliccation
