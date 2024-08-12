@@ -1,26 +1,25 @@
-
 {% load static %} <!-- Load static tag library -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ</title>
+    <title>User Guide</title>
     <!-- Bootstrap CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
     .navbar {
-            background-color: #f0f0f0; /* Weak gray background */
-            padding: 0.5rem 1rem; /* Smaller padding */
-        }
-        .navbar-title {
-            font-size: 1.2rem; /* Smaller font size */
-            color: #333333; /* Dark color for better readability */
-        }
-        .navbar-brand img {
-            height: 30px; /* Smaller logo height */
-        }
+        background-color: #f0f0f0; /* Weak gray background */
+        padding: 0.5rem 1rem; /* Smaller padding */
+    }
+    .navbar-title {
+        font-size: 1.2rem; /* Smaller font size */
+        color: #333333; /* Dark color for better readability */
+    }
+    .navbar-brand img {
+        height: 30px; /* Smaller logo height */
+    }
 </style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,17 +32,17 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'faq' %}">F&Q</a>
+                    <a class="nav-link" href="{% url 'faq' %}">Support Page</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container mt-4">
-        <h1>Frequently Asked Questions (F&Q)</h1><br>
+        <h1>User Guide</h1><br>
         <div class="card-body">
-            <h5 class="card-title">Frequently Asked Questions</h5>
+            <h5 class="card-title">Overview</h5>
             <p>
-                Our FAQ section is designed to assist users with uploading datasets and using our machine learning application. We have based our approach on best practices from leading machine learning platforms.
+                Our user guide is designed to assist users with uploading datasets and using our machine learning application. We have based our approach on best practices from leading machine learning platforms.
             </p>
             <p>
                 For example, we have looked at:
@@ -58,10 +57,9 @@
                 <li><a href="https://www.ibm.com/docs/en/watson-studio" target="_blank">IBM Watson Studio</a> - Provides details on uploading datasets and managing machine learning projects.</li>
             </ul>
             <p>
-                These references have guided us in developing our FAQ section to ensure we address common user questions effectively.
+                These references have guided us in developing our user guide to ensure we address common user questions effectively.
             </p>
         </div>
-        
         
         <div class="accordion" id="faqAccordion">
             <div class="card">
@@ -74,7 +72,7 @@
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
                     <div class="card-body">
-                        The Reports and Analytics app allows you to view and analyze various metrics and data related to your energy usage. You can generate reports, view charts, and gain insights into your energy consumption patterns by clicking on the article you want to see , the data related to the article selected will be visualized on the page.
+                        The Reports and Analytics app allows you to view and analyze various metrics and data related to your energy usage. You can generate reports, view charts, and gain insights into your energy consumption patterns by clicking on the article you want to see. The data related to the article selected will be visualized on the page.
                     </div>
                 </div>
             </div>
@@ -117,10 +115,9 @@
                             <li><strong>Form Validation:</strong> The form validates input values. Correct any errors indicated by the form.</li>
                             <li><strong>Model and Scaler:</strong> Ensure the model, scaler, and encoder files are correctly placed in the `energy_prediction` directory.</li>
                             <li><strong>Server Logs:</strong> For debugging, check server logs if predictions are incorrect or if errors occur.</li>
-                            <li><strong>Handling Missing Data:</strong> The app will prompt you to correct any missing or invalid data before proceeding with predictions.</li>
+                            <li><strong>Handling Missing Data:</strong> The app will prompt you to correct any missing or invalid data before proceeding with predictions.
                         </ul>
                     </div>
-                    
                 </div>
             </div>
             <div class="card">
@@ -166,14 +163,12 @@
                     
                         <h6>Constraints and Considerations:</h6>
                         <ul>
-                            <li><strong>Ensure Data Accuracy:</strong> Your CSV file should include columns such as `energia`, `WORKSTATION_CPU_POWER`, and `WORKSTATION_GPU_POWER`. Missing or incorrect columns may lead to errors or inaccurate results.</li>
-                            <li><strong>Form Validation:</strong> The form will validate the uploaded file. Ensure your file is correctly formatted and contains all necessary data.</li>
+                            <li><strong>Ensure Data Accuracy:</strong> Your CSV file should include columns such as `energia`, `WORKSTATION_CPU_POWER`, and `GPU_0_UTILIZATION` for accurate anomaly detection.</li>
                             <li><strong>Model and Scaler:</strong> Ensure the model and scaler files are correctly placed in the `anomaly_detection` directory.</li>
-                            <li><strong>Server Logs:</strong> For debugging, check server logs if anomalies are not detected as expected or if errors occur.</li>
-                            <li><strong>Handling Missing Data:</strong> The app will handle missing data by filling it with column means before processing. Ensure that your data file is well-prepared to avoid issues.</li>
+                            <li><strong>Server Logs:</strong> For debugging, check server logs if anomalies are not detected or if errors occur.</li>
+                            <li><strong>Handling Missing Data:</strong> The app will prompt you to correct any missing or invalid data before proceeding with anomaly detection.</li>
                         </ul>
                     </div>
-                    
                 </div>
             </div>
             <div class="card">
@@ -188,7 +183,7 @@
                     <div class="card-body">
                         <h5 class="card-title">How do I use the Data Tracking app?</h5>
                         <p>
-                            The Data Tracking app allows you to upload CSV files and generate various types of charts based on your data. You can visualize your data using line, scatter, bar, or pie charts.
+                            The Data Tracking app allows you to upload and visualize real-time data. You can upload your data and immediately see the results visualized in graphs and charts.
                         </p>
                         
                         <h6>Access the App:</h6>
@@ -198,43 +193,38 @@
                     
                         <h6>Upload Data File:</h6>
                         <ul>
-                            <li>Select a CSV file containing the data you wish to visualize.</li>
-                            <li>Ensure that the file is in CSV format and includes the necessary columns for plotting.</li>
+                            <li>Select the file containing your data from your local storage.</li>
+                            <li>Ensure the file is in CSV format and contains the necessary columns.</li>
                         </ul>
                     
                         <h6>Fill Out the Form:</h6>
                         <ul>
-                            <li><strong>Chart Type:</strong> Choose the type of chart you want to generate (line, scatter, bar, or pie).</li>
-                            <li><strong>X-Axis:</strong> Select the column for the X-axis by entering the column number.</li>
-                            <li><strong>Y-Axis:</strong> Select the columns for the Y-axis by entering comma-separated column numbers. Note that some chart types may require only one Y-axis column.</li>
+                            <li><strong>Data File:</strong> Upload a CSV file containing the data to be tracked.</li>
                         </ul>
                     
                         <h6>Submit the Form:</h6>
                         <p>
-                            After filling out the form and uploading the file, submit the form to generate the chart.
+                            After uploading the file, submit the form to start tracking and visualizing your data.
                         </p>
                     
                         <h6>View Results:</h6>
                         <p>
-                            The app will display the generated chart based on the selected chart type and data. You can view the chart directly on the page.
+                            The app will display the results in various charts and graphs, showing real-time data changes as you upload new files.
                         </p>
                     
                         <h6>Constraints and Considerations:</h6>
                         <ul>
-                            <li><strong>Ensure File Type:</strong> The file must be in CSV format. Other file types will not be accepted.</li>
-                            <li><strong>Column Validity:</strong> Make sure the selected X-axis and Y-axis columns are valid and exist in the CSV file.</li>
-                            <li><strong>Chart Type Compatibility:</strong> Ensure that the selected chart type matches the data provided. For example, scatter and pie charts require specific configurations.</li>
-                            <li><strong>Error Handling:</strong> The app will notify you of any errors, such as invalid column numbers or unsupported chart types. Address these issues to successfully generate your chart.</li>
-                            <li><strong>Data Accuracy:</strong> Verify that the data in your CSV file is correct and properly formatted to avoid issues with chart generation.</li>
+                            <li><strong>Ensure Data Accuracy:</strong> Your CSV file should include columns such as `energia`, `WORKSTATION_CPU_POWER`, and `GPU_0_UTILIZATION` for accurate tracking.</li>
+                            <li><strong>Server Logs:</strong> For debugging, check server logs if data is not visualized correctly or if errors occur.</li>
+                            <li><strong>Handling Missing Data:</strong> The app will prompt you to correct any missing or invalid data before proceeding with data tracking.</li>
                         </ul>
                     </div>
-                    
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
+    
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
