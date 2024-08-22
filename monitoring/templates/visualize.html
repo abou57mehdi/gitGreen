@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{% static 'images/ecologie.png' %}">
+    <title>Visualize Data</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-group.hidden {
+            display: none;
+        }
+        .navbar {
+            background-color: #f0f0f0; /* Weak gray background */
+            padding: 0.5rem 1rem; /* Smaller padding */
+        }
+        .navbar-title {
+            font-size: 1.2rem; /* Smaller font size */
+            color: #333333; /* Dark color for better readability */
+        }
+        .navbar-brand img {
+            height: 30px; /* Smaller logo height */
+        }
+    </style>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Company Logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq' %}">User guide</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1 class="mb-4">Visualize Data</h1>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.source_type.id_for_label }}" class="form-label">{{ form.source_type.label }}</label>
+                {{ form.source_type }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.chart_type.id_for_label }}" class="form-label">{{ form.chart_type.label }}</label>
+                {{ form.chart_type }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.x_axis.id_for_label }}" class="form-label">{{ form.x_axis.label }}</label>
+                {{ form.x_axis }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.y_axis.id_for_label }}" class="form-label">{{ form.y_axis.label }}</label>
+                {{ form.y_axis }}
+            </div>
+
+            <div id="ftp-fields" class="form-group hidden">
+                <label for="{{ form.ftp_server.id_for_label }}" class="form-label">{{ form.ftp_server.label }}</label>
+                {{ form.ftp_server }}
+            </div>
+            <div id="ftp-user-field" class="form-group hidden">
+                <label for="{{ form.ftp_user.id_for_label }}" class="form-label">{{ form.ftp_user.label }}</label>
+                {{ form.ftp_user }}
+            </div>
+            <div id="ftp-password-field" class="form-group hidden">
+                <label for="{{ form.ftp_password.id_for_label }}" class="form-label">{{ form.ftp_password.label }}</label>
+                {{ form.ftp_password }}
+            </div>
+            <div id="ftp-file-path-field" class="form-group hidden">
+                <label for="{{ form.ftp_file_path.id_for_label }}" class="form-label">{{ form.ftp_file_path.label }}</label>
+                {{ form.ftp_file_path }}
+            </div>
+
+            <div id="sql-fields" class="form-group hidden">
+                <label for="{{ form.sql_host.id_for_label }}" class="form-label">{{ form.sql_host.label }}</label>
+                {{ form.sql_host }}
+            </div>
+            <div id="sql-user-field" class="form-group hidden">
+                <label for="{{ form.sql_user.id_for_label }}" class="form-label">{{ form.sql_user.label }}</label>
+                {{ form.sql_user }}
+            </div>
+            <div id="sql-password-field" class="form-group hidden">
+                <label for="{{ form.sql_password.id_for_label }}" class="form-label">{{ form.sql_password.label }}</label>
+                {{ form.sql_password }}
+            </div>
+            <div id="sql-database-field" class="form-group hidden">
+                <label for="{{ form.sql_database.id_for_label }}" class="form-label">{{ form.sql_database.label }}</label>
+                {{ form.sql_database }}
+            </div>
+            <div id="sql-query-field" class="form-group hidden">
+                <label for="{{ form.sql_query.id_for_label }}" class="form-label">{{ form.sql_query.label }}</label>
+                {{ form.sql_query }}
+            </div>
+            <div id="db-type-field" class="form-group hidden">
+                <label for="{{ form.db_type.id_for_label }}" class="form-label">{{ form.db_type.label }}</label>
+                {{ form.db_type }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generate Visualization</button>
+        </form>
+
+        {% if ftp_graph %}
+            <h2 class="mt-4">FTP Data Chart</h2>
+            <div>{{ ftp_graph|safe }}</div>
+        {% endif %}
+
+        {% if sql_graph %}
+            <h2 class="mt-4">SQL Data Chart</h2>
+            <div>{{ sql_graph|safe }}</div>
+        {% endif %}
+
+        {% if ftp_error %}
+            <div class="alert alert-danger mt-4" role="alert">
+                {{ ftp_error }}
+            </div>
+        {% endif %}
+
+        {% if sql_error %}
+            <div class="alert alert-danger mt-4" role="alert">
+                {{ sql_error }}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sourceTypeField = document.querySelector('#id_source_type');
+            const ftpFields = document.querySelectorAll('#ftp-fields, #ftp-user-field, #ftp-password-field, #ftp-file-path-field');
+            const sqlFields = document.querySelectorAll('#sql-fields, #sql-user-field, #sql-password-field, #sql-database-field, #sql-query-field, #db-type-field');
+
+            function toggleFields() {
+                if (sourceTypeField.value === 'ftp') {
+                    ftpFields.forEach(field => field.classList.remove('hidden'));
+                    sqlFields.forEach(field => field.classList.add('hidden'));
+                } else if (sourceTypeField.value === 'sql') {
+                    sqlFields.forEach(field => field.classList.remove('hidden'));
+                    ftpFields.forEach(field => field.classList.add('hidden'));
+                } else {
+                    ftpFields.forEach(field => field.classList.add('hidden'));
+                    sqlFields.forEach(field => field.classList.add('hidden'));
+                }
+            }
+
+            sourceTypeField.addEventListener('change', toggleFields);
+
+            // Initialize visibility based on current value
+            toggleFields();
+        });
+    </script>
+</body>
+</html>
