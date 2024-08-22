@@ -15,6 +15,7 @@ click==8.1.7
 colorama==0.4.6
 comm==0.2.2
 configparser==7.0.0
+gunicorn
 contourpy==1.2.1
 cryptography==43.0.0
 cycler==0.12.1
